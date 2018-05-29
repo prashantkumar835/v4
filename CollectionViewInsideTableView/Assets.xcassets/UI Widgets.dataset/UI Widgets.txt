@@ -1,0 +1,250 @@
+Android Widgets
+=============
+
+Object -> View -> Text View -> Button -> CompoundButton;
+
+Android Button represents a push-button. The android.widget.Button is subclass of TextView class and CompoundButton is the subclass of Button class.
+
+There are different types of buttons in android such as RadioButton, ToggleButton, CompoundButton etc.
+
+    public void addListenerOnButton(){  
+        edittext1=(EditText)findViewById(R.id.editText1);  
+        edittext2=(EditText)findViewById(R.id.editText2);  
+        buttonSum=(Button)findViewById(R.id.button1);  
+          
+        buttonSum.setOnClickListener(new OnClickListener(){  
+  
+            @Override  
+            public void onClick(View view) {  
+                String value1=edittext1.getText().toString();  
+                String value2=edittext2.getText().toString();  
+                int a=Integer.parseInt(value1);  
+                int b=Integer.parseInt(value2);  
+                int sum=a+b;  
+    Toast.makeText(getApplicationContext(),String.valueOf(sum),Toast.LENGTH_LONG).show();  
+            }  
+              
+        });  
+          
+    }  
+    ___________________________________________________________
+    
+    Android Toast
+    ===========
+    
+    Object -> Toast
+    
+    Andorid Toast can be used to display information for the short period of time. A toast contains message to be displayed quickly and disappears after sometime.
+
+The android.widget.Toast class is the subclass of java.lang.Object class.
+
+Toast class
+---------------
+Toast class is used to show notification for a particular interval of time. After sometime it disappears. It doesn't block the user interaction.
+
+Constants of Toast class
+--------------------------------
+There are only 2 constants of Toast class which are given below.
+
+Constant
+public static final int LENGTH_LONG	------>displays view for the long duration of time.
+public static final int LENGTH_SHORT------>displays view for the short duration of time.
+
+Methods of Toast class
+---------------------------------
+The widely used methods of Toast class are given below.
+
+Method
+public static Toast makeText(Context context, CharSequence text, int duration)--------->makes the toast containing text and duration.
+public void show()------->displays toast.
+public void setMargin (float horizontalMargin, float verticalMargin)	------>changes the horizontal and vertical margin difference.
+
+Android Toast Example
+-------------------------------
+Toast.makeText(getApplicationContext(),"Hello
+Javatpoint",Toast.LENGTH_SHORT).show();  
+
+Another code:
+Toast toast=Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT);  
+toast.setMargin(50,50);  
+toast.show();  
+Here, getApplicationContext() method returns the instance of Context.
+_____________________________________________________________
+
+Android ToggleButton
+=================
+
+Object -> View -> TextView -> Button -> CompoundButton -> ToggleButton
+
+Android Toggle Button can be used to display checked/unchecked (On/Off) state on the button.
+
+It is beneficial if user have to change the setting between two states. It can be used to On/Off Sound, Wifi, Bluetooth etc.
+
+Since Android 4.0, there is another type of toggle button called switch that provides slider control.
+
+Android ToggleButton and Switch both are the subclasses of CompoundButton class.
+
+Android ToggleButton class
+ToggleButton class provides the facility of creating the toggle button.
+
+XML Attributes of ToggleButton class
+The 3 XML attributes of ToggleButton class.
+
+XML Attribute	
+android:disabledAlpha	---------->The alpha to apply to the indicator when disabled.
+android:textOff	-------------->The text for the button when it is not checked.
+android:textOn	----------->The text for the button when it is checked.
+
+Methods of ToggleButton class
+The widely used methods of ToggleButton class are given below.
+
+Method	
+CharSequence getTextOff()	----------->Returns the text when button is not in the checked state.
+CharSequence getTextOn()	------------>Returns the text for when button is in the checked state.
+void setChecked(boolean checked)--------------->Changes the checked state of this button.
+____________________________________________________________
+
+Android CheckBox
+==============
+
+Object -> View -> TextView -> Button -> CompoundButton -> CheckBox
+
+Android CheckBox is a type of two state button either checked or unchecked.
+
+Android CheckBox class is the subclass of CompoundButton class.
+
+Android CheckBox class
+The android.widget.CheckBox ----------->class provides the facility of creating the CheckBoxes.
+
+Methods of CheckBox class
+There are many inherited methods of View, TextView, and Button classes in the CheckBox class. Some of them are as follows:
+
+Method	
+public boolean isChecked()	------------->Returns true if it is checked otherwise false.
+public void setChecked(boolean status)	------------------>Changes the state of the CheckBox.
+
+_____________________________________________________________
+
+Android RadioButton
+================
+
+RadioButton is a two states button which is either checked or unchecked. If a single radio button is unchecked, we can click it to make checked radio button. Once a radio button is checked, it cannot be marked as unchecked by user.
+
+RadioButton is generally used with RadioGroup. RadioGroup contains several radio buttons, marking one radio button as checked makes all other radio buttons as unchecked.
+__________________________________________________________
+Android Dynamic RadioButton
+=======================
+Instead of creating RadioButton through drag and drop from palette, android also facilitates you to create it programmatically (dynamically). For creating dynamic RadioButton, we need to use android.view.ViewGroup.LayoutParams which configures the width and height of views and implements setOnCheckedChangeListener() method of RadioGroup class.
+_____________________________________________________________
+
+Android AlertDialog
+===============
+android alert dialog
+Android AlertDialog can be used to display the dialog message with OK and Cancel buttons. It can be used to interrupt and ask the user about his/her choice to continue or discontinue.
+
+Android AlertDialog is composed of three regions: title, content area and action buttons.
+
+Android AlertDialog is the subclass of Dialog class.
+
+
+public class MainActivity extends Activity {  
+  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+          
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);  
+        //Uncomment the below code to Set the message and title from the strings.xml file  
+        //builder.setMessage(R.string.dialog_message) .setTitle(R.string.dialog_title);  
+          
+        //Setting message manually and performing action on button click  
+        builder.setMessage("Do you want to close this application ?")  
+            .setCancelable(false)  
+            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {  
+                public void onClick(DialogInterface dialog, int id) {  
+                finish();  
+                }  
+            })  
+            .setNegativeButton("No", new DialogInterface.OnClickListener() {  
+                public void onClick(DialogInterface dialog, int id) {  
+                //  Action for 'NO' Button  
+                dialog.cancel();  
+             }  
+            });  
+  
+        //Creating dialog box  
+        AlertDialog alert = builder.create();  
+        //Setting the title manually  
+        alert.setTitle("AlertDialogExample");  
+        alert.show();  
+        setContentView(R.layout.activity_main);  
+    }  
+  
+    @Override  
+    public boolean onCreateOptionsMenu(Menu menu) {  
+        // Inflate the menu; this adds items to the action bar if it is present.  
+        getMenuInflater().inflate(R.menu.activity_main, menu);  
+        return true;  
+    }  
+  
+}  
+
+_____________________________________________________________
+
+Android Spinner
+============
+
+Object -> View -> ViewGroup -> AdapterView -> AbsSpinner -> Spinner
+
+Android Spinner
+Android Spinner is like the combox box of AWT or Swing. It can be used to display the multiple options to the user in which only one item can be selected by the user.
+
+Android spinner is like the drop down menu with multiple values from which the end user can select only one value.
+
+Android spinner is associated with AdapterView. So you need to use one of the adapter classes with spinner.
+
+Android Spinner class is the subclass of AsbSpinner class.
+
+
+public class MainActivity extends Activity implements  
+AdapterView.OnItemSelectedListener {  
+  
+    String[] country = { "India", "USA", "China", "Japan", "Other",  };  
+  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        //Getting the instance of Spinner and applying OnItemSelectedListener on it  
+        Spinner spin = (Spinner) findViewById(R.id.spinner1);  
+        spin.setOnItemSelectedListener(this);  
+          
+        //Creating the ArrayAdapter instance having the country list  
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,country);  
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);  
+        //Setting the ArrayAdapter data on the Spinner  
+        spin.setAdapter(aa);  
+    }  
+  
+      
+    //Performing action onItemSelected and onNothing selected  
+    @Override  
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int position,long id) {  
+        Toast.makeText(getApplicationContext(),country[position] ,Toast.LENGTH_LONG).show();  
+    }  
+  
+    @Override  
+    public void onNothingSelected(AdapterView<?> arg0) {  
+        // TODO Auto-generated method stub  
+          
+    }  
+  
+    @Override  
+    public boolean onCreateOptionsMenu(Menu menu) {  
+        // Inflate the menu; this adds items to the action bar if it is present.  
+        getMenuInflater().inflate(R.menu.activity_main, menu);  
+        return true;  
+    }  
+}  
+
+_____________________________________________________________
